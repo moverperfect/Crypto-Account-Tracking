@@ -5,20 +5,26 @@ namespace CryptoAccountTracking.Objects
     /// <summary>
     /// A profile contains all the information for a single portfolio
     /// </summary>
-    internal class Profile
+    public class Profile
     {
         /// <summary>
         /// Name of the profile
         /// </summary>
-        internal string Name { get; set; }
+        public string Name { get; set; }
 
         /// <summary>
         /// All of the accounts held by the profile
         /// </summary>
-        internal List<Account> Accounts { get; set; } = new List<Account>();
+        public List<Account> Accounts { get; set; } = new List<Account>();
 
-        internal List<Transaction> Transactions { get; set; } = new List<Transaction>();
+        /// <summary>
+        /// All of the transactions associated with the user profile
+        /// </summary>
+        public List<Transaction> Transactions { get; set; } = new List<Transaction>();
 
-        //internal List<Currency> Currencies { get; set; } = new List<Currency>();
+        /// <summary>
+        /// All of the currencies that are stored in this profile
+        /// </summary>
+        public List<Currency> Currencies { get; set; } = new List<Currency>();
     }
 }

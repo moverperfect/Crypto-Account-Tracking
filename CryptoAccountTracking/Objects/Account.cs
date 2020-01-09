@@ -3,21 +3,26 @@
     /// <summary>
     /// Defines an account under the control of the user
     /// </summary>
-    internal class Account
+    public class Account
     {
         /// <summary>
         /// The address of the account that is used for referencing
         /// </summary>
-        internal string Address { get; set; }
+        public string Address { get; set; }
 
         /// <summary>
         /// The name of the account to be used for the user to give a purpose or location
         /// </summary>
-        internal string Name { get; set; }
+        public string Name { get; set; }
 
         /// <summary>
         /// Notes for the account
         /// </summary>
-        internal string Notes { get; set; }
+        public string Notes { get; set; }
+
+        /// <summary>
+        /// Default currency code for the account
+        /// </summary>
+        public string DefaultCurrency { get; set; }
     }
 }

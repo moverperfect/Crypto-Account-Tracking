@@ -1,4 +1,6 @@
-﻿namespace CryptoAccountTracking.Forms
+﻿using System.IO;
+
+namespace CryptoAccountTracking.Forms
 {
     partial class MainWindow
     {
@@ -52,6 +54,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.tp_Settings = new System.Windows.Forms.TabPage();
+            this.ofd_Profile = new System.Windows.Forms.OpenFileDialog();
             this.tc_Main.SuspendLayout();
             this.tp_Accounts.SuspendLayout();
             this.tc_Transactions.SuspendLayout();
@@ -86,13 +89,13 @@
             // btn_LoadProfile
             // 
             this.btn_LoadProfile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_LoadProfile.Enabled = false;
             this.btn_LoadProfile.Location = new System.Drawing.Point(1177, 12);
             this.btn_LoadProfile.Name = "btn_LoadProfile";
             this.btn_LoadProfile.Size = new System.Drawing.Size(75, 23);
             this.btn_LoadProfile.TabIndex = 2;
             this.btn_LoadProfile.Text = "Load Profile";
             this.btn_LoadProfile.UseVisualStyleBackColor = true;
+            this.btn_LoadProfile.Click += new System.EventHandler(this.btn_LoadProfile_Click);
             // 
             // tc_Main
             // 
@@ -336,6 +339,12 @@
             this.tp_Settings.Text = "Settings";
             this.tp_Settings.UseVisualStyleBackColor = true;
             // 
+            // ofd_Profile
+            // 
+            this.ofd_Profile.DefaultExt = "json";
+            this.ofd_Profile.FileName = "Profile";
+            this.ofd_Profile.InitialDirectory = Directory.GetCurrentDirectory();
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -349,6 +358,7 @@
             this.MinimumSize = new System.Drawing.Size(1280, 720);
             this.Name = "MainWindow";
             this.Text = "Crypto Account Tracking";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainWindow_FormClosed);
             this.tc_Main.ResumeLayout(false);
             this.tp_Accounts.ResumeLayout(false);
             this.tp_Accounts.PerformLayout();
@@ -390,6 +400,7 @@
         private System.Windows.Forms.Button btn_DeleteTrade;
         private System.Windows.Forms.Button btn_EditTrade;
         private System.Windows.Forms.DataGridView dg_Trades;
+        private System.Windows.Forms.OpenFileDialog ofd_Profile;
     }
 }
 
