@@ -11,6 +11,8 @@ namespace CryptoAccountTracking.Forms
         internal EditAccount()
         {
             InitializeComponent();
+
+            Text = "New Account";
         }
 
         private void cb_CustomAddress_CheckedChanged(object sender, EventArgs e)

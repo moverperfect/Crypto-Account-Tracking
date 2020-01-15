@@ -5,7 +5,7 @@ using CryptoAccountTracking.Objects;
 
 namespace CryptoAccountTracking.Forms
 {
-    public partial class EditTrade : Form
+    internal partial class EditTrade : Form
     {
         internal Transaction Transaction;
 
@@ -35,6 +35,8 @@ namespace CryptoAccountTracking.Forms
             txt_FromCurrency.Text = currentAccount.DefaultCurrency;
             txt_ToCurrency.Text = currentAccount.DefaultCurrency;
             txt_FeeCurrency.Text = currentAccount.DefaultCurrency;
+
+            Text = "New Trade";
         }
 
         private void btn_Save_Click(object sender, System.EventArgs e)
