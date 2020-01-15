@@ -68,6 +68,7 @@
             this.Controls.Add(this.btn_Create);
             this.Controls.Add(this.txt_ProfileName);
             this.Controls.Add(this.lbl_ProfileName);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "NewProfile";

@@ -86,6 +86,7 @@
             // 
             // btn_Cancel
             // 
+            this.btn_Cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btn_Cancel.Location = new System.Drawing.Point(278, 269);
             this.btn_Cancel.Name = "btn_Cancel";
             this.btn_Cancel.Size = new System.Drawing.Size(75, 23);
@@ -237,8 +238,10 @@
             // 
             // EditTrade
             // 
+            this.AcceptButton = this.btn_Save;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btn_Cancel;
             this.ClientSize = new System.Drawing.Size(446, 302);
             this.Controls.Add(this.txt_ToCurrency);
             this.Controls.Add(this.lbl_ToCurrency);
@@ -262,6 +265,8 @@
             this.Controls.Add(this.lbl_To);
             this.Controls.Add(this.lbl_From);
             this.Controls.Add(this.lbl_Date);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
             this.Name = "EditTrade";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "EditTrade";
