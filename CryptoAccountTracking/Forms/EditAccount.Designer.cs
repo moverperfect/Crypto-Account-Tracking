@@ -142,8 +142,10 @@
             // 
             // EditAccount
             // 
+            this.AcceptButton = this.btn_Save;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btn_Cancel;
             this.ClientSize = new System.Drawing.Size(361, 410);
             this.Controls.Add(this.txt_CurrencyCode);
             this.Controls.Add(this.lbl_CurrencyCode);
@@ -156,6 +158,8 @@
             this.Controls.Add(this.txt_Name);
             this.Controls.Add(this.lbl_Notes);
             this.Controls.Add(this.lbl_Name);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
             this.Name = "EditAccount";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "EditAccount";

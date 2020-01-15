@@ -149,6 +149,9 @@ namespace CryptoAccountTracking.Forms
             RefreshTotalPortfolio();
         }
 
+        /// <summary>
+        /// Refreshes the total portfolio table on the Total portfolio tab
+        /// </summary>
         private void RefreshTotalPortfolio()
         {
             dg_TotalPortfolio.Rows.Clear();
@@ -171,6 +174,9 @@ namespace CryptoAccountTracking.Forms
             }
         }
 
+        /// <summary>
+        /// Refreshes the balance table on the Accounts tab
+        /// </summary>
         private void RefreshCurrencyTable()
         {
             dg_Balance.Rows.Clear();
@@ -183,6 +189,9 @@ namespace CryptoAccountTracking.Forms
             }
         }
 
+        /// <summary>
+        /// Refreshes the transactions table on the accounts tab
+        /// </summary>
         private void RefreshTransactionsTable()
         {
             dg_Transactions.Rows.Clear();
@@ -201,6 +210,9 @@ namespace CryptoAccountTracking.Forms
             }
         }
 
+        /// <summary>
+        /// Refreshes the trades table on the accounts tab
+        /// </summary>
         private void RefreshTradesTable()
         {
             dg_Trades.Rows.Clear();
@@ -226,6 +238,9 @@ namespace CryptoAccountTracking.Forms
             }
         }
 
+        /// <summary>
+        /// Refreshes the currency locations table on the total portfolio tab
+        /// </summary>
         private void RefreshCurrencyLocationTable()
         {
             dg_CurrencyLocation.Rows.Clear();
