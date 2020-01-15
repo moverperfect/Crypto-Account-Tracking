@@ -1,6 +1,4 @@
-﻿using System.IO;
-
-namespace CryptoAccountTracking.Forms
+﻿namespace CryptoAccountTracking.Forms
 {
     partial class MainWindow
     {
@@ -31,10 +29,12 @@ namespace CryptoAccountTracking.Forms
         private void InitializeComponent()
         {
             this.lbl_Profile = new System.Windows.Forms.Label();
-            this.btn_NewProfile = new System.Windows.Forms.Button();
+            this.btn_CreateProfile = new System.Windows.Forms.Button();
             this.btn_LoadProfile = new System.Windows.Forms.Button();
             this.tc_Main = new System.Windows.Forms.TabControl();
             this.tp_Accounts = new System.Windows.Forms.TabPage();
+            this.cb_CurrencyFilter = new System.Windows.Forms.ComboBox();
+            this.btn_Filter = new System.Windows.Forms.Button();
             this.tc_Transactions = new System.Windows.Forms.TabControl();
             this.tp_Transactions = new System.Windows.Forms.TabPage();
             this.btn_CreateTransaction = new System.Windows.Forms.Button();
@@ -47,12 +47,26 @@ namespace CryptoAccountTracking.Forms
             this.btn_EditTrade = new System.Windows.Forms.Button();
             this.dg_Trades = new System.Windows.Forms.DataGridView();
             this.lbl_Balance = new System.Windows.Forms.Label();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.dg_Balance = new System.Windows.Forms.DataGridView();
             this.lbl_Accounts = new System.Windows.Forms.Label();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.btn_DeleteAccount = new System.Windows.Forms.Button();
+            this.btn_EditAccount = new System.Windows.Forms.Button();
+            this.btn_CreateAccount = new System.Windows.Forms.Button();
+            this.dg_Accounts = new System.Windows.Forms.DataGridView();
+            this.tp_TotalPortfolio = new System.Windows.Forms.TabPage();
+            this.dg_CurrencyLocation = new System.Windows.Forms.DataGridView();
+            this.dg_TotalPortfolio = new System.Windows.Forms.DataGridView();
+            this.tp_Import = new System.Windows.Forms.TabPage();
+            this.btn_GdaxImport = new System.Windows.Forms.Button();
+            this.cb_Gdax = new System.Windows.Forms.ComboBox();
+            this.btn_GdaxOpen = new System.Windows.Forms.Button();
+            this.txt_GdaxPath = new System.Windows.Forms.TextBox();
+            this.lbl_Gdax = new System.Windows.Forms.Label();
+            this.btn_BitfinexImport = new System.Windows.Forms.Button();
+            this.cb_Bitfinex = new System.Windows.Forms.ComboBox();
+            this.btn_BitfinexOpen = new System.Windows.Forms.Button();
+            this.txt_BitfinexPath = new System.Windows.Forms.TextBox();
+            this.lbl_Bitfinex = new System.Windows.Forms.Label();
             this.tp_Settings = new System.Windows.Forms.TabPage();
             this.ofd_Profile = new System.Windows.Forms.OpenFileDialog();
             this.tc_Main.SuspendLayout();
@@ -62,8 +76,12 @@ namespace CryptoAccountTracking.Forms
             ((System.ComponentModel.ISupportInitialize)(this.dg_Transactions)).BeginInit();
             this.tp_Trades.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dg_Trades)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dg_Balance)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dg_Accounts)).BeginInit();
+            this.tp_TotalPortfolio.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dg_CurrencyLocation)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dg_TotalPortfolio)).BeginInit();
+            this.tp_Import.SuspendLayout();
             this.SuspendLayout();
             // 
             // lbl_Profile
@@ -75,16 +93,16 @@ namespace CryptoAccountTracking.Forms
             this.lbl_Profile.TabIndex = 0;
             this.lbl_Profile.Text = "Profile: ";
             // 
-            // btn_NewProfile
+            // btn_CreateProfile
             // 
-            this.btn_NewProfile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_NewProfile.Location = new System.Drawing.Point(1096, 13);
-            this.btn_NewProfile.Name = "btn_NewProfile";
-            this.btn_NewProfile.Size = new System.Drawing.Size(75, 23);
-            this.btn_NewProfile.TabIndex = 1;
-            this.btn_NewProfile.Text = "New Profile";
-            this.btn_NewProfile.UseVisualStyleBackColor = true;
-            this.btn_NewProfile.Click += new System.EventHandler(this.btn_NewProfile_Click);
+            this.btn_CreateProfile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_CreateProfile.Location = new System.Drawing.Point(1096, 13);
+            this.btn_CreateProfile.Name = "btn_CreateProfile";
+            this.btn_CreateProfile.Size = new System.Drawing.Size(75, 23);
+            this.btn_CreateProfile.TabIndex = 1;
+            this.btn_CreateProfile.Text = "Create Profile";
+            this.btn_CreateProfile.UseVisualStyleBackColor = true;
+            this.btn_CreateProfile.Click += new System.EventHandler(this.btn_CreateProfile_Click);
             // 
             // btn_LoadProfile
             // 
@@ -103,6 +121,8 @@ namespace CryptoAccountTracking.Forms
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tc_Main.Controls.Add(this.tp_Accounts);
+            this.tc_Main.Controls.Add(this.tp_TotalPortfolio);
+            this.tc_Main.Controls.Add(this.tp_Import);
             this.tc_Main.Controls.Add(this.tp_Settings);
             this.tc_Main.Location = new System.Drawing.Point(16, 42);
             this.tc_Main.Name = "tc_Main";
@@ -112,14 +132,16 @@ namespace CryptoAccountTracking.Forms
             // 
             // tp_Accounts
             // 
+            this.tp_Accounts.Controls.Add(this.cb_CurrencyFilter);
+            this.tp_Accounts.Controls.Add(this.btn_Filter);
             this.tp_Accounts.Controls.Add(this.tc_Transactions);
             this.tp_Accounts.Controls.Add(this.lbl_Balance);
-            this.tp_Accounts.Controls.Add(this.dataGridView2);
+            this.tp_Accounts.Controls.Add(this.dg_Balance);
             this.tp_Accounts.Controls.Add(this.lbl_Accounts);
-            this.tp_Accounts.Controls.Add(this.button3);
-            this.tp_Accounts.Controls.Add(this.button2);
-            this.tp_Accounts.Controls.Add(this.button1);
-            this.tp_Accounts.Controls.Add(this.dataGridView1);
+            this.tp_Accounts.Controls.Add(this.btn_DeleteAccount);
+            this.tp_Accounts.Controls.Add(this.btn_EditAccount);
+            this.tp_Accounts.Controls.Add(this.btn_CreateAccount);
+            this.tp_Accounts.Controls.Add(this.dg_Accounts);
             this.tp_Accounts.Location = new System.Drawing.Point(4, 22);
             this.tp_Accounts.Name = "tp_Accounts";
             this.tp_Accounts.Padding = new System.Windows.Forms.Padding(3);
@@ -128,8 +150,29 @@ namespace CryptoAccountTracking.Forms
             this.tp_Accounts.Text = "Accounts";
             this.tp_Accounts.UseVisualStyleBackColor = true;
             // 
+            // cb_CurrencyFilter
+            // 
+            this.cb_CurrencyFilter.FormattingEnabled = true;
+            this.cb_CurrencyFilter.Location = new System.Drawing.Point(1016, 251);
+            this.cb_CurrencyFilter.Name = "cb_CurrencyFilter";
+            this.cb_CurrencyFilter.Size = new System.Drawing.Size(121, 21);
+            this.cb_CurrencyFilter.TabIndex = 4;
+            // 
+            // btn_Filter
+            // 
+            this.btn_Filter.Location = new System.Drawing.Point(1143, 251);
+            this.btn_Filter.Name = "btn_Filter";
+            this.btn_Filter.Size = new System.Drawing.Size(75, 23);
+            this.btn_Filter.TabIndex = 4;
+            this.btn_Filter.Text = "Filter";
+            this.btn_Filter.UseVisualStyleBackColor = true;
+            this.btn_Filter.Click += new System.EventHandler(this.btn_Filter_Click);
+            // 
             // tc_Transactions
             // 
+            this.tc_Transactions.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tc_Transactions.Controls.Add(this.tp_Transactions);
             this.tc_Transactions.Controls.Add(this.tp_Trades);
             this.tc_Transactions.Location = new System.Drawing.Point(621, 256);
@@ -162,6 +205,7 @@ namespace CryptoAccountTracking.Forms
             this.btn_CreateTransaction.TabIndex = 13;
             this.btn_CreateTransaction.Text = "Create Transaction";
             this.btn_CreateTransaction.UseVisualStyleBackColor = true;
+            this.btn_CreateTransaction.Click += new System.EventHandler(this.btn_CreateTransaction_Click);
             // 
             // btn_DeleteTransaction
             // 
@@ -187,12 +231,17 @@ namespace CryptoAccountTracking.Forms
             // 
             // dg_Transactions
             // 
+            this.dg_Transactions.AllowUserToAddRows = false;
+            this.dg_Transactions.AllowUserToDeleteRows = false;
             this.dg_Transactions.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dg_Transactions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dg_Transactions.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dg_Transactions.Location = new System.Drawing.Point(6, 6);
+            this.dg_Transactions.MultiSelect = false;
             this.dg_Transactions.Name = "dg_Transactions";
+            this.dg_Transactions.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dg_Transactions.Size = new System.Drawing.Size(581, 274);
             this.dg_Transactions.TabIndex = 12;
             // 
@@ -220,6 +269,7 @@ namespace CryptoAccountTracking.Forms
             this.btn_CreateTrade.TabIndex = 13;
             this.btn_CreateTrade.Text = "Create Trade";
             this.btn_CreateTrade.UseVisualStyleBackColor = true;
+            this.btn_CreateTrade.Click += new System.EventHandler(this.btn_CreateTrade_Click);
             // 
             // btn_DeleteTrade
             // 
@@ -245,12 +295,15 @@ namespace CryptoAccountTracking.Forms
             // 
             // dg_Trades
             // 
+            this.dg_Trades.AllowUserToAddRows = false;
+            this.dg_Trades.AllowUserToDeleteRows = false;
             this.dg_Trades.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dg_Trades.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dg_Trades.Location = new System.Drawing.Point(6, 6);
             this.dg_Trades.Name = "dg_Trades";
+            this.dg_Trades.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dg_Trades.Size = new System.Drawing.Size(581, 274);
             this.dg_Trades.TabIndex = 12;
             // 
@@ -263,16 +316,21 @@ namespace CryptoAccountTracking.Forms
             this.lbl_Balance.TabIndex = 6;
             this.lbl_Balance.Text = "Balance: ";
             // 
-            // dataGridView2
+            // dg_Balance
             // 
-            this.dataGridView2.AllowUserToAddRows = false;
-            this.dataGridView2.AllowUserToDeleteRows = false;
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(621, 19);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.ReadOnly = true;
-            this.dataGridView2.Size = new System.Drawing.Size(601, 230);
-            this.dataGridView2.TabIndex = 5;
+            this.dg_Balance.AllowUserToAddRows = false;
+            this.dg_Balance.AllowUserToDeleteRows = false;
+            this.dg_Balance.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dg_Balance.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dg_Balance.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.dg_Balance.Location = new System.Drawing.Point(621, 19);
+            this.dg_Balance.MultiSelect = false;
+            this.dg_Balance.Name = "dg_Balance";
+            this.dg_Balance.ReadOnly = true;
+            this.dg_Balance.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dg_Balance.Size = new System.Drawing.Size(601, 230);
+            this.dg_Balance.TabIndex = 5;
             // 
             // lbl_Accounts
             // 
@@ -283,51 +341,201 @@ namespace CryptoAccountTracking.Forms
             this.lbl_Accounts.TabIndex = 4;
             this.lbl_Accounts.Text = "Accounts:";
             // 
-            // button3
+            // btn_DeleteAccount
             // 
-            this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button3.Enabled = false;
-            this.button3.Location = new System.Drawing.Point(339, 572);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(91, 23);
-            this.button3.TabIndex = 3;
-            this.button3.Text = "Delete Account";
-            this.button3.UseVisualStyleBackColor = true;
+            this.btn_DeleteAccount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btn_DeleteAccount.Enabled = false;
+            this.btn_DeleteAccount.Location = new System.Drawing.Point(339, 572);
+            this.btn_DeleteAccount.Name = "btn_DeleteAccount";
+            this.btn_DeleteAccount.Size = new System.Drawing.Size(91, 23);
+            this.btn_DeleteAccount.TabIndex = 3;
+            this.btn_DeleteAccount.Text = "Delete Account";
+            this.btn_DeleteAccount.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // btn_EditAccount
             // 
-            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button2.Enabled = false;
-            this.button2.Location = new System.Drawing.Point(436, 572);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(85, 23);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "Edit Account";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btn_EditAccount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btn_EditAccount.Enabled = false;
+            this.btn_EditAccount.Location = new System.Drawing.Point(436, 572);
+            this.btn_EditAccount.Name = "btn_EditAccount";
+            this.btn_EditAccount.Size = new System.Drawing.Size(85, 23);
+            this.btn_EditAccount.TabIndex = 2;
+            this.btn_EditAccount.Text = "Edit Account";
+            this.btn_EditAccount.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // btn_CreateAccount
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button1.Enabled = false;
-            this.button1.Location = new System.Drawing.Point(527, 572);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(86, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "New Account";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btn_CreateAccount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btn_CreateAccount.Enabled = false;
+            this.btn_CreateAccount.Location = new System.Drawing.Point(527, 572);
+            this.btn_CreateAccount.Name = "btn_CreateAccount";
+            this.btn_CreateAccount.Size = new System.Drawing.Size(86, 23);
+            this.btn_CreateAccount.TabIndex = 1;
+            this.btn_CreateAccount.Text = "New Account";
+            this.btn_CreateAccount.UseVisualStyleBackColor = true;
+            this.btn_CreateAccount.Click += new System.EventHandler(this.btn_CreateAccount_Click);
             // 
-            // dataGridView1
+            // dg_Accounts
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.dg_Accounts.AllowUserToAddRows = false;
+            this.dg_Accounts.AllowUserToDeleteRows = false;
+            this.dg_Accounts.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(7, 19);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(607, 547);
-            this.dataGridView1.TabIndex = 0;
+            this.dg_Accounts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dg_Accounts.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.dg_Accounts.Location = new System.Drawing.Point(7, 19);
+            this.dg_Accounts.MultiSelect = false;
+            this.dg_Accounts.Name = "dg_Accounts";
+            this.dg_Accounts.ReadOnly = true;
+            this.dg_Accounts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dg_Accounts.Size = new System.Drawing.Size(607, 547);
+            this.dg_Accounts.TabIndex = 0;
+            this.dg_Accounts.SelectionChanged += new System.EventHandler(this.dg_Accounts_SelectionChanged);
+            // 
+            // tp_TotalPortfolio
+            // 
+            this.tp_TotalPortfolio.Controls.Add(this.dg_CurrencyLocation);
+            this.tp_TotalPortfolio.Controls.Add(this.dg_TotalPortfolio);
+            this.tp_TotalPortfolio.Location = new System.Drawing.Point(4, 22);
+            this.tp_TotalPortfolio.Name = "tp_TotalPortfolio";
+            this.tp_TotalPortfolio.Size = new System.Drawing.Size(1228, 601);
+            this.tp_TotalPortfolio.TabIndex = 3;
+            this.tp_TotalPortfolio.Text = "Total Portfolio";
+            this.tp_TotalPortfolio.UseVisualStyleBackColor = true;
+            // 
+            // dg_CurrencyLocation
+            // 
+            this.dg_CurrencyLocation.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dg_CurrencyLocation.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dg_CurrencyLocation.Location = new System.Drawing.Point(810, 3);
+            this.dg_CurrencyLocation.Name = "dg_CurrencyLocation";
+            this.dg_CurrencyLocation.Size = new System.Drawing.Size(415, 595);
+            this.dg_CurrencyLocation.TabIndex = 1;
+            // 
+            // dg_TotalPortfolio
+            // 
+            this.dg_TotalPortfolio.AllowUserToAddRows = false;
+            this.dg_TotalPortfolio.AllowUserToDeleteRows = false;
+            this.dg_TotalPortfolio.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.dg_TotalPortfolio.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dg_TotalPortfolio.Location = new System.Drawing.Point(3, 3);
+            this.dg_TotalPortfolio.MultiSelect = false;
+            this.dg_TotalPortfolio.Name = "dg_TotalPortfolio";
+            this.dg_TotalPortfolio.ReadOnly = true;
+            this.dg_TotalPortfolio.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dg_TotalPortfolio.Size = new System.Drawing.Size(801, 595);
+            this.dg_TotalPortfolio.TabIndex = 0;
+            this.dg_TotalPortfolio.SelectionChanged += new System.EventHandler(this.dg_TotalPortfolio_SelectionChanged);
+            // 
+            // tp_Import
+            // 
+            this.tp_Import.Controls.Add(this.btn_GdaxImport);
+            this.tp_Import.Controls.Add(this.cb_Gdax);
+            this.tp_Import.Controls.Add(this.btn_GdaxOpen);
+            this.tp_Import.Controls.Add(this.txt_GdaxPath);
+            this.tp_Import.Controls.Add(this.lbl_Gdax);
+            this.tp_Import.Controls.Add(this.btn_BitfinexImport);
+            this.tp_Import.Controls.Add(this.cb_Bitfinex);
+            this.tp_Import.Controls.Add(this.btn_BitfinexOpen);
+            this.tp_Import.Controls.Add(this.txt_BitfinexPath);
+            this.tp_Import.Controls.Add(this.lbl_Bitfinex);
+            this.tp_Import.Location = new System.Drawing.Point(4, 22);
+            this.tp_Import.Name = "tp_Import";
+            this.tp_Import.Size = new System.Drawing.Size(1228, 601);
+            this.tp_Import.TabIndex = 2;
+            this.tp_Import.Text = "Import";
+            this.tp_Import.UseVisualStyleBackColor = true;
+            // 
+            // btn_GdaxImport
+            // 
+            this.btn_GdaxImport.Location = new System.Drawing.Point(309, 29);
+            this.btn_GdaxImport.Name = "btn_GdaxImport";
+            this.btn_GdaxImport.Size = new System.Drawing.Size(75, 22);
+            this.btn_GdaxImport.TabIndex = 9;
+            this.btn_GdaxImport.Text = "Import";
+            this.btn_GdaxImport.UseVisualStyleBackColor = true;
+            this.btn_GdaxImport.Click += new System.EventHandler(this.btn_GdaxImport_Click);
+            // 
+            // cb_Gdax
+            // 
+            this.cb_Gdax.FormattingEnabled = true;
+            this.cb_Gdax.Location = new System.Drawing.Point(182, 29);
+            this.cb_Gdax.Name = "cb_Gdax";
+            this.cb_Gdax.Size = new System.Drawing.Size(121, 21);
+            this.cb_Gdax.TabIndex = 8;
+            // 
+            // btn_GdaxOpen
+            // 
+            this.btn_GdaxOpen.Location = new System.Drawing.Point(150, 29);
+            this.btn_GdaxOpen.Name = "btn_GdaxOpen";
+            this.btn_GdaxOpen.Size = new System.Drawing.Size(26, 22);
+            this.btn_GdaxOpen.TabIndex = 7;
+            this.btn_GdaxOpen.Text = "...";
+            this.btn_GdaxOpen.UseVisualStyleBackColor = true;
+            this.btn_GdaxOpen.Click += new System.EventHandler(this.btn_GdaxOpen_Click);
+            // 
+            // txt_GdaxPath
+            // 
+            this.txt_GdaxPath.Location = new System.Drawing.Point(50, 30);
+            this.txt_GdaxPath.Name = "txt_GdaxPath";
+            this.txt_GdaxPath.Size = new System.Drawing.Size(100, 20);
+            this.txt_GdaxPath.TabIndex = 6;
+            // 
+            // lbl_Gdax
+            // 
+            this.lbl_Gdax.AutoSize = true;
+            this.lbl_Gdax.Location = new System.Drawing.Point(3, 33);
+            this.lbl_Gdax.Name = "lbl_Gdax";
+            this.lbl_Gdax.Size = new System.Drawing.Size(37, 13);
+            this.lbl_Gdax.TabIndex = 5;
+            this.lbl_Gdax.Text = "GDAX";
+            // 
+            // btn_BitfinexImport
+            // 
+            this.btn_BitfinexImport.Location = new System.Drawing.Point(309, 2);
+            this.btn_BitfinexImport.Name = "btn_BitfinexImport";
+            this.btn_BitfinexImport.Size = new System.Drawing.Size(75, 22);
+            this.btn_BitfinexImport.TabIndex = 4;
+            this.btn_BitfinexImport.Text = "Import";
+            this.btn_BitfinexImport.UseVisualStyleBackColor = true;
+            this.btn_BitfinexImport.Click += new System.EventHandler(this.btn_BitfinexImport_Click);
+            // 
+            // cb_Bitfinex
+            // 
+            this.cb_Bitfinex.FormattingEnabled = true;
+            this.cb_Bitfinex.Location = new System.Drawing.Point(182, 2);
+            this.cb_Bitfinex.Name = "cb_Bitfinex";
+            this.cb_Bitfinex.Size = new System.Drawing.Size(121, 21);
+            this.cb_Bitfinex.TabIndex = 3;
+            // 
+            // btn_BitfinexOpen
+            // 
+            this.btn_BitfinexOpen.Location = new System.Drawing.Point(150, 2);
+            this.btn_BitfinexOpen.Name = "btn_BitfinexOpen";
+            this.btn_BitfinexOpen.Size = new System.Drawing.Size(26, 22);
+            this.btn_BitfinexOpen.TabIndex = 2;
+            this.btn_BitfinexOpen.Text = "...";
+            this.btn_BitfinexOpen.UseVisualStyleBackColor = true;
+            this.btn_BitfinexOpen.Click += new System.EventHandler(this.btn_BitfinexOpen_Click);
+            // 
+            // txt_BitfinexPath
+            // 
+            this.txt_BitfinexPath.Location = new System.Drawing.Point(50, 3);
+            this.txt_BitfinexPath.Name = "txt_BitfinexPath";
+            this.txt_BitfinexPath.Size = new System.Drawing.Size(100, 20);
+            this.txt_BitfinexPath.TabIndex = 1;
+            // 
+            // lbl_Bitfinex
+            // 
+            this.lbl_Bitfinex.AutoSize = true;
+            this.lbl_Bitfinex.Location = new System.Drawing.Point(3, 6);
+            this.lbl_Bitfinex.Name = "lbl_Bitfinex";
+            this.lbl_Bitfinex.Size = new System.Drawing.Size(41, 13);
+            this.lbl_Bitfinex.TabIndex = 0;
+            this.lbl_Bitfinex.Text = "Bitfinex";
             // 
             // tp_Settings
             // 
@@ -343,7 +551,7 @@ namespace CryptoAccountTracking.Forms
             // 
             this.ofd_Profile.DefaultExt = "json";
             this.ofd_Profile.FileName = "Profile";
-            this.ofd_Profile.InitialDirectory = Directory.GetCurrentDirectory();
+            this.ofd_Profile.InitialDirectory = "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Enterprise\\Common7\\IDE\\";
             // 
             // MainWindow
             // 
@@ -353,7 +561,7 @@ namespace CryptoAccountTracking.Forms
             this.ClientSize = new System.Drawing.Size(1264, 681);
             this.Controls.Add(this.tc_Main);
             this.Controls.Add(this.btn_LoadProfile);
-            this.Controls.Add(this.btn_NewProfile);
+            this.Controls.Add(this.btn_CreateProfile);
             this.Controls.Add(this.lbl_Profile);
             this.MinimumSize = new System.Drawing.Size(1280, 720);
             this.Name = "MainWindow";
@@ -367,8 +575,13 @@ namespace CryptoAccountTracking.Forms
             ((System.ComponentModel.ISupportInitialize)(this.dg_Transactions)).EndInit();
             this.tp_Trades.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dg_Trades)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dg_Balance)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dg_Accounts)).EndInit();
+            this.tp_TotalPortfolio.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dg_CurrencyLocation)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dg_TotalPortfolio)).EndInit();
+            this.tp_Import.ResumeLayout(false);
+            this.tp_Import.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -377,20 +590,20 @@ namespace CryptoAccountTracking.Forms
         #endregion
 
         private System.Windows.Forms.Label lbl_Profile;
-        private System.Windows.Forms.Button btn_NewProfile;
+        private System.Windows.Forms.Button btn_CreateProfile;
         private System.Windows.Forms.Button btn_LoadProfile;
         private System.Windows.Forms.TabControl tc_Main;
         private System.Windows.Forms.TabPage tp_Accounts;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Button btn_DeleteAccount;
+        private System.Windows.Forms.Button btn_EditAccount;
+        private System.Windows.Forms.Button btn_CreateAccount;
+        private System.Windows.Forms.DataGridView dg_Accounts;
         private System.Windows.Forms.TabPage tp_Settings;
         private System.Windows.Forms.TabControl tc_Transactions;
         private System.Windows.Forms.TabPage tp_Transactions;
         private System.Windows.Forms.TabPage tp_Trades;
         private System.Windows.Forms.Label lbl_Balance;
-        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.DataGridView dg_Balance;
         private System.Windows.Forms.Label lbl_Accounts;
         private System.Windows.Forms.Button btn_CreateTransaction;
         private System.Windows.Forms.Button btn_DeleteTransaction;
@@ -401,6 +614,22 @@ namespace CryptoAccountTracking.Forms
         private System.Windows.Forms.Button btn_EditTrade;
         private System.Windows.Forms.DataGridView dg_Trades;
         private System.Windows.Forms.OpenFileDialog ofd_Profile;
+        private System.Windows.Forms.TabPage tp_Import;
+        private System.Windows.Forms.Button btn_BitfinexImport;
+        private System.Windows.Forms.ComboBox cb_Bitfinex;
+        private System.Windows.Forms.Button btn_BitfinexOpen;
+        private System.Windows.Forms.TextBox txt_BitfinexPath;
+        private System.Windows.Forms.Label lbl_Bitfinex;
+        private System.Windows.Forms.ComboBox cb_CurrencyFilter;
+        private System.Windows.Forms.Button btn_Filter;
+        private System.Windows.Forms.Button btn_GdaxImport;
+        private System.Windows.Forms.ComboBox cb_Gdax;
+        private System.Windows.Forms.Button btn_GdaxOpen;
+        private System.Windows.Forms.TextBox txt_GdaxPath;
+        private System.Windows.Forms.Label lbl_Gdax;
+        private System.Windows.Forms.TabPage tp_TotalPortfolio;
+        private System.Windows.Forms.DataGridView dg_CurrencyLocation;
+        private System.Windows.Forms.DataGridView dg_TotalPortfolio;
     }
 }
 

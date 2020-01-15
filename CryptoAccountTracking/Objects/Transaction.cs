@@ -1,4 +1,5 @@
 ﻿using System;
+using Newtonsoft.Json;
 
 namespace CryptoAccountTracking.Objects
 {
@@ -7,6 +8,25 @@ namespace CryptoAccountTracking.Objects
     /// </summary>
     public class Transaction
     {
+        internal Transaction()
+        {
+
+        }
+
+        internal Transaction(Transaction transaction)
+        {
+            Hash = transaction.Hash;
+            Date = transaction.Date;
+            From = transaction.From;
+            FromCurrency = transaction.FromCurrency;
+            FromAmount = transaction.FromAmount;
+            To = transaction.To;
+            ToCurrency = transaction.ToCurrency;
+            ToAmount = transaction.ToAmount;
+            FeeCurrency = transaction.FeeCurrency;
+            FeeAmount = transaction.FeeAmount;
+        }
+
         /// <summary>
         /// Hash reference for the transaction
         /// </summary>
@@ -56,5 +76,11 @@ namespace CryptoAccountTracking.Objects
         /// The amount of fee that was taken
         /// </summary>
         public decimal FeeAmount { get; set; }
+
+        /// <summary>
+        /// The rate between the from and to amounts
+        /// </summary>
+        [JsonIgnore]
+        public decimal Rate => FromAmount / ToAmount;
     }
 }

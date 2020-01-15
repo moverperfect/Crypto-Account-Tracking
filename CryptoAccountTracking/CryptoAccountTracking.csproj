@@ -49,6 +49,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\CurrencyHolding.cs" />
+    <Compile Include="Forms\EditAccount.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\EditAccount.Designer.cs">
+      <DependentUpon>EditAccount.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\EditTrade.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\EditTrade.Designer.cs">
+      <DependentUpon>EditTrade.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\EditTransaction.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\EditTransaction.Designer.cs">
+      <DependentUpon>EditTransaction.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -68,6 +87,15 @@
     <Compile Include="Objects\Transaction.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\EditAccount.resx">
+      <DependentUpon>EditAccount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\EditTrade.resx">
+      <DependentUpon>EditTrade.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\EditTransaction.resx">
+      <DependentUpon>EditTransaction.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </EmbeddedResource>
