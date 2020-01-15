@@ -40,6 +40,8 @@ namespace CryptoAccountTracking.Forms
             cb_From.SelectedIndex = cb_To.SelectedIndex;
             txt_Currency.Text = currentAccount.DefaultCurrency;
             txt_FeeCurrency.Text = currentAccount.DefaultCurrency;
+
+            Text = "New Transaction";
         }
 
         private void btn_Save_Click(object sender, EventArgs e)

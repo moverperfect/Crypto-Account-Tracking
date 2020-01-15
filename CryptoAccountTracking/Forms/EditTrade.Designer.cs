@@ -1,6 +1,6 @@
 ﻿namespace CryptoAccountTracking.Forms
 {
-    partial class EditTrade
+    internal partial class EditTrade
     {
         /// <summary>
         /// Required designer variable.
