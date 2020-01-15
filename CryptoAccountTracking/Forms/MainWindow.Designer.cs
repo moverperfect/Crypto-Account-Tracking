@@ -69,6 +69,7 @@
             this.lbl_Bitfinex = new System.Windows.Forms.Label();
             this.tp_Settings = new System.Windows.Forms.TabPage();
             this.ofd_Profile = new System.Windows.Forms.OpenFileDialog();
+            this.lbl_Version = new System.Windows.Forms.Label();
             this.tc_Main.SuspendLayout();
             this.tp_Accounts.SuspendLayout();
             this.tc_Transactions.SuspendLayout();
@@ -82,6 +83,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dg_CurrencyLocation)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dg_TotalPortfolio)).BeginInit();
             this.tp_Import.SuspendLayout();
+            this.tp_Settings.SuspendLayout();
             this.SuspendLayout();
             // 
             // lbl_Profile
@@ -539,6 +541,7 @@
             // 
             // tp_Settings
             // 
+            this.tp_Settings.Controls.Add(this.lbl_Version);
             this.tp_Settings.Location = new System.Drawing.Point(4, 22);
             this.tp_Settings.Name = "tp_Settings";
             this.tp_Settings.Padding = new System.Windows.Forms.Padding(3);
@@ -552,6 +555,16 @@
             this.ofd_Profile.DefaultExt = "json";
             this.ofd_Profile.FileName = "Profile";
             this.ofd_Profile.InitialDirectory = "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Enterprise\\Common7\\IDE\\";
+            // 
+            // lbl_Version
+            // 
+            this.lbl_Version.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbl_Version.AutoSize = true;
+            this.lbl_Version.Location = new System.Drawing.Point(1150, 585);
+            this.lbl_Version.Name = "lbl_Version";
+            this.lbl_Version.Size = new System.Drawing.Size(72, 13);
+            this.lbl_Version.TabIndex = 0;
+            this.lbl_Version.Text = "Version: 0.1.0";
             // 
             // MainWindow
             // 
@@ -582,6 +595,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dg_TotalPortfolio)).EndInit();
             this.tp_Import.ResumeLayout(false);
             this.tp_Import.PerformLayout();
+            this.tp_Settings.ResumeLayout(false);
+            this.tp_Settings.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -630,6 +645,7 @@
         private System.Windows.Forms.TabPage tp_TotalPortfolio;
         private System.Windows.Forms.DataGridView dg_CurrencyLocation;
         private System.Windows.Forms.DataGridView dg_TotalPortfolio;
+        private System.Windows.Forms.Label lbl_Version;
     }
 }
 
