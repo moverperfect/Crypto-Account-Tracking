@@ -1,5 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
+using CoinGecko.Clients;
+using CoinGecko.Entities.Response.Coins;
+using CoinGecko.Interfaces;
 using CryptoAccountTracking.Handlers;
 using CryptoAccountTracking.Objects;
 
@@ -19,6 +25,10 @@ namespace CryptoAccountTracking.Forms
         /// Current profile selected by the user
         /// </summary>
         private Account _selectedAccount;
+
+        private IReadOnlyList<CoinList> coinList;
+
+
 
         /// <summary>
         /// Main form to handle all functionality
@@ -162,9 +172,10 @@ namespace CryptoAccountTracking.Forms
 
                 foreach (var currencyTotal in currencyTotals)
                 {
+                    var currentCurrency = _profile.Currencies.Find(t => t.Ticker == currencyTotal.Key);
                     dg_TotalPortfolio.Rows.Add(currencyTotal.Key,
-                        _profile.Currencies.Find(t => t.Ticker == currencyTotal.Key).Name,
-                        currencyTotal.Value.ToString("0.#############################"), "N/A");
+                        currentCurrency.Name,
+                        currencyTotal.Value.ToString("0.#############################"), (currencyTotal.Value * currentCurrency.Price).ToString("F2") + " USD");
                 }
 
                 if (_profile.Currencies.Count > 0)
@@ -206,7 +217,7 @@ namespace CryptoAccountTracking.Forms
                 dg_Transactions.Rows.Add(transaction.Date, transaction.From, transaction.To,
                     transaction.FromAmount.ToString("0.#############################"),
                     transaction.FromCurrency, transaction.FeeAmount.ToString("0.#############################"),
-                    transaction.FeeCurrency, transaction.Hash);
+                    transaction.FeeCurrency, _selectedAccount.SingleCurrencyHoldingsAtDate(_profile.Transactions, transaction.Date, "ETH"));
             }
         }
 
@@ -226,7 +237,7 @@ namespace CryptoAccountTracking.Forms
                 if (cb_CurrencyFilter.Text != "" && cb_CurrencyFilter.Text != trade.FromCurrency &&
                     cb_CurrencyFilter.Text != trade.ToCurrency && cb_CurrencyFilter.Text != trade.FeeCurrency) continue;
                 var rate = (trade.ToAmount + trade.FeeAmount) / trade.FromAmount;
-                if (rate < 1M)
+                if (rate < 1M && rate != 0)
                 {
                     rate = Math.Round(1M / rate, 2);
                 }
@@ -234,7 +245,7 @@ namespace CryptoAccountTracking.Forms
                 dg_Trades.Rows.Add(trade.Date, trade.From, trade.To,
                     trade.FromAmount.ToString("0.#############################"), trade.FromCurrency,
                     trade.ToAmount.ToString("0.#############################"), trade.ToCurrency, rate,
-                    trade.FeeAmount.ToString("0.#############################"), trade.FeeCurrency, trade.Hash);
+                    trade.FeeAmount.ToString("0.#############################"), trade.FeeCurrency, trade.Hash/*_selectedAccount.SingleCurrencyHoldingsAtDate(_profile.Transactions, trade.Date, "BTC")*/);
             }
         }
 
@@ -254,7 +265,9 @@ namespace CryptoAccountTracking.Forms
                 var balance =
                     account.SingleCurrencyHoldingsAtDate(_profile.Transactions, DateTime.Now, selectedCurrency);
 
-                dg_CurrencyLocation.Rows.Add(account.Name, account.Address, balance.ToString("0.#############################"), "N/A");
+                dg_CurrencyLocation.Rows.Add(account.Name, account.Address,
+                    balance.ToString("0.#############################"),
+                    (balance * _profile.Currencies.Find(t => t.Ticker == selectedCurrency).Price).ToString("F2") + " USD");
             }
         }
 
@@ -483,6 +496,72 @@ namespace CryptoAccountTracking.Forms
         private void btn_Filter_Click(object sender, EventArgs e)
         {
             RefreshAccounts();
+        }
+
+        private void btn_RefreshPrices_Click(object sender, EventArgs e)
+        {
+            var _client = CoinGeckoClient.Instance;
+            var task =  _client.CoinsClient.GetCoinList();
+            task.Wait();
+            coinList = task.Result;
+
+            var ourList = new List<CoinList>();
+
+            foreach (var coin in coinList)
+            {
+                ourList.AddRange(from currency in _profile.Currencies where currency.Ticker.ToLower() == coin.Symbol.ToLower() select coin);
+            }
+
+            var ourListShort = ourList.Select(list => list.Id).ToArray();
+
+            var task2 = _client.SimpleClient.GetSimplePrice(ourList.Select(list => list.Id).ToArray(), new[] {"USD"});
+            task2.Wait();
+            var priceList = task2.Result;
+
+            foreach (var price in priceList)
+            {
+                
+            }
+
+            var currencyTotals = _profile.ListAllCurrencyTotals();
+
+            var totalPortfolio = 0M;
+
+            foreach (var price in priceList)
+            {
+                try
+                {
+                    _profile.Currencies.Find(t => t.Ticker == coinList.First(p => p.Id == price.Key).Symbol.ToUpper()).Price
+                        = (decimal)price.Value["usd"];
+                    totalPortfolio += (decimal)price.Value["usd"] * currencyTotals[coinList.First(t => t.Id == price.Key).Symbol.ToUpper()];
+                }
+                catch (Exception) { }
+            }
+
+            lbl_TotalHoldings.Text = "Total Holdings: " + totalPortfolio.ToString("F2") + " USD";
+
+            RefreshAccounts();
+        }
+
+        private void lbl_TotalHoldings_SizeChanged(object sender, EventArgs e)
+        {
+            lbl_TotalHoldings.Location =
+                new Point(Size.Width - 369 + 81 - lbl_TotalHoldings.Size.Width, lbl_TotalHoldings.Location.Y);
+        }
+
+        private void dg_TotalPortfolio_SortCompare(object sender, DataGridViewSortCompareEventArgs e)
+        {
+            if (e.Column.Index == 2)
+            {
+                e.SortResult = double.Parse(e.CellValue1.ToString())
+                    .CompareTo(double.Parse(e.CellValue2.ToString()));
+                e.Handled = true;
+            } else if (e.Column.Index == 3)
+            {
+                e.SortResult = double.Parse(e.CellValue1.ToString().Split(' ')[0])
+                    .CompareTo(double.Parse(e.CellValue2.ToString().Split(' ')[0]));
+                e.Handled = true;
+            }
         }
     }
 }

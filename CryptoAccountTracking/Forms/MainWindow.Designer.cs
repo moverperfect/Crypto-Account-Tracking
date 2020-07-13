@@ -68,8 +68,10 @@
             this.txt_BitfinexPath = new System.Windows.Forms.TextBox();
             this.lbl_Bitfinex = new System.Windows.Forms.Label();
             this.tp_Settings = new System.Windows.Forms.TabPage();
-            this.ofd_Profile = new System.Windows.Forms.OpenFileDialog();
             this.lbl_Version = new System.Windows.Forms.Label();
+            this.ofd_Profile = new System.Windows.Forms.OpenFileDialog();
+            this.btn_RefreshPrices = new System.Windows.Forms.Button();
+            this.lbl_TotalHoldings = new System.Windows.Forms.Label();
             this.tc_Main.SuspendLayout();
             this.tp_Accounts.SuspendLayout();
             this.tc_Transactions.SuspendLayout();
@@ -431,6 +433,7 @@
             this.dg_TotalPortfolio.Size = new System.Drawing.Size(801, 595);
             this.dg_TotalPortfolio.TabIndex = 0;
             this.dg_TotalPortfolio.SelectionChanged += new System.EventHandler(this.dg_TotalPortfolio_SelectionChanged);
+            this.dg_TotalPortfolio.SortCompare += new System.Windows.Forms.DataGridViewSortCompareEventHandler(this.dg_TotalPortfolio_SortCompare);
             // 
             // tp_Import
             // 
@@ -550,12 +553,6 @@
             this.tp_Settings.Text = "Settings";
             this.tp_Settings.UseVisualStyleBackColor = true;
             // 
-            // ofd_Profile
-            // 
-            this.ofd_Profile.DefaultExt = "json";
-            this.ofd_Profile.FileName = "Profile";
-            this.ofd_Profile.InitialDirectory = "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Enterprise\\Common7\\IDE\\";
-            // 
             // lbl_Version
             // 
             this.lbl_Version.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -566,12 +563,42 @@
             this.lbl_Version.TabIndex = 0;
             this.lbl_Version.Text = "Version: 0.1.0";
             // 
+            // ofd_Profile
+            // 
+            this.ofd_Profile.DefaultExt = "json";
+            this.ofd_Profile.FileName = "Profile";
+            this.ofd_Profile.InitialDirectory = "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Enterprise\\Common7\\IDE\\";
+            // 
+            // btn_RefreshPrices
+            // 
+            this.btn_RefreshPrices.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_RefreshPrices.Location = new System.Drawing.Point(998, 13);
+            this.btn_RefreshPrices.Name = "btn_RefreshPrices";
+            this.btn_RefreshPrices.Size = new System.Drawing.Size(92, 23);
+            this.btn_RefreshPrices.TabIndex = 4;
+            this.btn_RefreshPrices.Text = "Refresh Prices";
+            this.btn_RefreshPrices.UseVisualStyleBackColor = true;
+            this.btn_RefreshPrices.Click += new System.EventHandler(this.btn_RefreshPrices_Click);
+            // 
+            // lbl_TotalHoldings
+            // 
+            this.lbl_TotalHoldings.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbl_TotalHoldings.AutoSize = true;
+            this.lbl_TotalHoldings.Location = new System.Drawing.Point(911, 17);
+            this.lbl_TotalHoldings.Name = "lbl_TotalHoldings";
+            this.lbl_TotalHoldings.Size = new System.Drawing.Size(81, 13);
+            this.lbl_TotalHoldings.TabIndex = 5;
+            this.lbl_TotalHoldings.Text = "Total Holdings: ";
+            this.lbl_TotalHoldings.SizeChanged += new System.EventHandler(this.lbl_TotalHoldings_SizeChanged);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.ClientSize = new System.Drawing.Size(1264, 681);
+            this.Controls.Add(this.lbl_TotalHoldings);
+            this.Controls.Add(this.btn_RefreshPrices);
             this.Controls.Add(this.tc_Main);
             this.Controls.Add(this.btn_LoadProfile);
             this.Controls.Add(this.btn_CreateProfile);
@@ -646,6 +673,8 @@
         private System.Windows.Forms.DataGridView dg_CurrencyLocation;
         private System.Windows.Forms.DataGridView dg_TotalPortfolio;
         private System.Windows.Forms.Label lbl_Version;
+        private System.Windows.Forms.Button btn_RefreshPrices;
+        private System.Windows.Forms.Label lbl_TotalHoldings;
     }
 }
 

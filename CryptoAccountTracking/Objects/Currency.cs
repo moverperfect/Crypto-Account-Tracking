@@ -1,4 +1,6 @@
-﻿namespace CryptoAccountTracking.Objects
+﻿using Newtonsoft.Json;
+
+namespace CryptoAccountTracking.Objects
 {
     /// <summary>
     /// Details of a single currency that a user could own
@@ -14,5 +16,7 @@
         /// The name of the currency e.g. Great British Pounds
         /// </summary>
         public string Name { get; set; }
+
+        [JsonIgnore] public decimal Price { get; set; }
     }
 }
