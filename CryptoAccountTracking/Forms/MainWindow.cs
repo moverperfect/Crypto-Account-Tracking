@@ -217,7 +217,7 @@ namespace CryptoAccountTracking.Forms
                 dg_Transactions.Rows.Add(transaction.Date, transaction.From, transaction.To,
                     transaction.FromAmount.ToString("0.#############################"),
                     transaction.FromCurrency, transaction.FeeAmount.ToString("0.#############################"),
-                    transaction.FeeCurrency, _selectedAccount.SingleCurrencyHoldingsAtDate(_profile.Transactions, transaction.Date, "ETH"));
+                    transaction.FeeCurrency, transaction.Hash /*_selectedAccount.SingleCurrencyHoldingsAtDate(_profile.Transactions, transaction.Date, "ETH")*/);
             }
         }
 
